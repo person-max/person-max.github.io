@@ -1,0 +1,51 @@
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);min-height:100vh;padding:20px;color:#fff}
+.container{max-width:900px;margin:0 auto;background:rgba(255,255,255,.1);backdrop-filter:blur(10px);border-radius:20px;padding:30px;box-shadow:0 8px 32px rgba(31,38,135,.37)}
+h1{text-align:center;margin-bottom:30px;font-size:2em;text-shadow:2px 2px 4px rgba(0,0,0,.3)}
+.current-time{text-align:center;font-size:2em;font-weight:bold;margin-bottom:20px;background:rgba(255,255,255,.1);padding:15px;border-radius:10px;border:1px solid rgba(255,255,255,.2)}
+.notice{background:rgba(255,235,59,.2);border:1px solid #ffeb3b;border-radius:10px;padding:15px;margin-bottom:20px;text-align:center}
+.btn{background:linear-gradient(45deg,#ff6b6b,#ff8e53);color:#fff;border:none;padding:12px 25px;border-radius:25px;cursor:pointer;font-size:16px;font-weight:bold;transition:.3s;box-shadow:0 4px 15px rgba(255,107,107,.3)}
+.btn:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(255,107,107,.4)}
+.btn:active{transform:translateY(-1px)}
+.btn-small{padding:8px 15px;font-size:14px}
+.btn-danger{background:linear-gradient(45deg,#e74c3c,#c0392b)}
+.btn-success{background:linear-gradient(45deg,#2ecc71,#27ae60)}
+.btn-play{background:linear-gradient(45deg,#3498db,#2980b9)}
+.alarm-creator,.alarms-list{background:rgba(255,255,255,.1);border-radius:15px;padding:25px;border:1px solid rgba(255,255,255,.2);margin-bottom:30px}
+.form-group{margin-bottom:20px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+label{display:block;margin-bottom:8px;font-weight:bold;color:#fff}
+input[type="time"],input[type="text"],input[type="number"],input[type="file"],select{width:100%;padding:12px;border:none;border-radius:10px;background:rgba(255,255,255,.9);font-size:16px;color:#333}
+input[type="file"]{cursor:pointer}
+input[type="time"]:focus,input[type="text"]:focus,input[type="number"]:focus,select:focus{outline:none;box-shadow:0 0 15px rgba(255,255,255,.5);transform:translateY(-2px);transition:.3s}
+.checkbox-group{display:flex;align-items:center;gap:10px;margin-bottom:15px}
+.checkbox-group input[type="checkbox"]{width:auto;transform:scale(1.2)}
+.file-upload-area{border:2px dashed rgba(255,255,255,.3);border-radius:10px;padding:20px;text-align:center;background:rgba(255,255,255,.05);margin-bottom:15px}
+.ringtone-options{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:end}
+.duration-inputs{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.duration-section{display:none}
+.alarm-item{background:rgba(255,255,255,.15);border-radius:12px;padding:20px;margin-bottom:15px;border-left:5px solid #ff6b6b;transition:.3s}
+.alarm-item.timed-alarm{border-left-color:#3498db}
+.alarm-item.needs-reupload{border-left-color:#f39c12;background:rgba(243,156,18,.1)}
+.alarm-item:hover{transform:translateX(5px);box-shadow:0 5px 15px rgba(0,0,0,.2)}
+.alarm-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.alarm-time{font-size:1.6em;font-weight:bold;color:#fff}
+.alarm-duration{font-size:.9em;color:#ffeb3b;background:rgba(255,235,59,.2);padding:4px 8px;border-radius:15px}
+.alarm-details{color:#ddd;font-size:1.05em;margin-bottom:15px}
+.alarm-sound{color:#bbb;font-size:.95em;font-style:italic}
+.alarm-controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.status{font-weight:bold;padding:5px 10px;border-radius:15px;font-size:12px;text-transform:uppercase}
+.status.active{background:rgba(46,204,113,.3);color:#2ecc71}
+.status.inactive{background:rgba(231,76,60,.3);color:#e74c3c}
+.status.playing{background:rgba(52,152,219,.3);color:#3498db;animation:pulse 1s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
+.alarm-modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.8);display:none;align-items:center;justify-content:center;z-index:1000}
+.modal-content{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);padding:40px;border-radius:20px;text-align:center;box-shadow:0 20px 40px rgba(0,0,0,.3);max-width:500px}
+.empty-state{text-align:center;color:#ddd;font-style:italic;padding:40px}
+@media (max-width:768px){
+  .container{padding:20px}
+  h1{font-size:1.8em}
+  .form-row,.duration-inputs{grid-template-columns:1fr}
+  .alarm-header{flex-direction:column;align-items:flex-start;gap:10px}
+  .alarm-controls{justify-content:flex-start}
+}

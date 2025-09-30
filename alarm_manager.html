@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Custom Alarm & Song Manager</title>
+  <link rel="stylesheet" href="alarm_manager.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Custom Alarm & Song Manager</h1>
+
+    <div class="current-time" id="currentTime">Loading...</div>
+
+    <div class="notice" id="audioNotice">
+      <p><strong>Audio permission needed</strong></p>
+      <p style="margin-top:6px;font-size:.95em;">Click the button once to enable sounds</p>
+      <button class="btn" id="enableAudioBtn" onclick="enableAudioManually()">Enable Audio</button>
+    </div>
+
+    <div class="alarm-creator">
+      <h2 style="margin-bottom:16px;">Create New Alarm</h2>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="alarmTime">Start Time</label>
+          <input type="time" id="alarmTime" required/>
+        </div>
+        <div class="form-group">
+          <label for="alarmLabel">Alarm Label</label>
+          <input type="text" id="alarmLabel" placeholder="e.g., Daily Song, Meeting Reminder" required/>
+        </div>
+      </div>
+
+      <div class="checkbox-group">
+        <input type="checkbox" id="timedAlarm"/>
+        <label for="timedAlarm">Set Duration</label>
+      </div>
+
+      <div class="duration-section" id="durationSection">
+        <div class="duration-inputs">
+          <div class="form-group">
+            <label for="durationMinutes">Duration (minutes)</label>
+            <input type="number" id="durationMinutes" min="1" max="120" value="15"/>
+          </div>
+          <div class="form-group">
+            <label for="endTime">End Time</label>
+            <input type="time" id="endTime" readonly/>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Choose Audio Source</label>
+        <div class="ringtone-options">
+          <select id="ringtoneSelect">
+            <option value="custom">Upload Your Own Song</option>
+            <option value="beep">Classic Beep</option>
+            <option value="chime">Gentle Chime</option>
+            <option value="buzz">Phone Buzz</option>
+            <option value="melody">Happy Melody</option>
+            <option value="alert">Alert Sound</option>
+            <option value="bell">Church Bell</option>
+            <option value="bird">Bird Chirping</option>
+            <option value="ocean">Ocean Waves</option>
+          </select>
+          <button type="button" class="btn btn-small btn-play" onclick="testCurrentRingtone()">Test</button>
+        </div>
+      </div>
+
+      <div id="customUpload" style="display:block;">
+        <div class="file-upload-area">
+          <input type="file" id="audioFile" accept="audio/mp3,audio/mpeg,audio/wav,audio/ogg,audio/m4a,audio/aac,.mp3,.wav,.ogg,.m4a,.aac"/>
+          <p style="margin-top:10px;">Upload your custom song</p>
+          <p style="font-size:.9em;color:#ddd;margin-top:5px;">Best formats: MP3, WAV, OGG, AAC-LC (.m4a, not Lossless)</p>
+
+          <div id="filePreview" style="display:none;margin-top:15px;padding:15px;background:rgba(255,255,255,.1);border-radius:8px;">
+            <p id="fileName" style="margin:0 0 10px 0;font-weight:bold;"></p>
+            <div style="display:flex;gap:10px;align-items:center;justify-content:center;">
+              <button type="button" class="btn btn-small btn-play" id="playBtn" onclick="previewSelectedFile()">Play</button>
+              <button type="button" class="btn btn-small btn-danger" id="stopBtn" onclick="stopPreview()" style="display:none;">Stop</button>
+            </div>
+          </div>
+
+          <p style="font-size:.85em;color:#ccc;margin-top:8px;">
+            Your song will play when the alarm triggers. Timed alarms loop for the full duration.
+          </p>
+        </div>
+      </div>
+
+      <button class="btn" onclick="addAlarm()">Add Alarm</button>
+    </div>
+
+    <div class="alarms-list">
+      <h2 style="margin-bottom:16px;">Your Alarms</h2>
+      <div id="alarmsList">
+        <div class="empty-state">No alarms set yet. Create your first alarm above.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="alarm-modal" id="alarmModal">
+    <div class="modal-content">
+      <h2>Alarm</h2>
+      <p id="alarmMessage">Time's up!</p>
+      <div class="modal-controls" style="display:flex;gap:15px;justify-content:center;flex-wrap:wrap;">
+        <button class="btn" onclick="dismissAlarm()">Dismiss</button>
+        <button class="btn btn-play" onclick="snoozeAlarm()">Snooze (5 min)</button>
+        <button class="btn btn-danger" onclick="stopPlaying()">Stop Playing</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="alarm_manager.js"></script>
+</body>
+</html>
